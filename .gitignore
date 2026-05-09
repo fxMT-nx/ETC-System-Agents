@@ -1,0 +1,20 @@
+# Dependencias
+node_modules/
+package.json
+package-lock.json
+
+# Entornos
+.env
+.env.local
+.env.*.local
+
+# Cache de GitHub research
+.github-cache/
+
+# Temp
+*.tmp
+*.temp
+
+# OS
+.DS_Store
+Thumbs.db

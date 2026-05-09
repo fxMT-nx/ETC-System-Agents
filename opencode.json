@@ -40,6 +40,10 @@
   },
   "permission": {
     "skill": {
+      "firecrawl-scraper": "allow",
+      "github-research": "allow",
+      "stackoverflow-research": "allow",
+      "docs-verifier": "allow",
       "*": "deny"
     }
   }

@@ -1,0 +1,237 @@
+name: Validate System Agents Structure
+
+on:
+  push:
+    branches: [master, main]
+    paths:
+      - '.opencode/**'
+      - 'opencode.json'
+      - 'prompts/**'
+  pull_request:
+    branches: [master, main]
+    paths:
+      - '.opencode/**'
+      - 'opencode.json'
+      - 'prompts/**'
+
+jobs:
+  validate-agents:
+    name: Validate agent frontmatter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate agent files
+        run: |
+          echo "Validating agents in .opencode/agents/..."
+          FAILED=0
+          EXPECTED_AGENTS=7
+          AGENT_COUNT=0
+
+          for agent_file in .opencode/agents/*.md; do
+            echo "Checking: $agent_file"
+            AGENT_COUNT=$((AGENT_COUNT + 1))
+
+            FRONTMATTER=$(sed -n '/^---$/,/^---$/p' "$agent_file" | head -n -1 | tail -n +2)
+
+            if ! echo "$FRONTMATTER" | grep -q "^description:"; then
+              echo "  FAIL: Missing 'description' field in $agent_file"
+              FAILED=1
+            else
+              echo "  OK description"
+            fi
+
+            if ! echo "$FRONTMATTER" | grep -q "^mode:"; then
+              echo "  FAIL: Missing 'mode' field in $agent_file"
+              FAILED=1
+            else
+              echo "  OK mode"
+            fi
+
+            MODE=$(echo "$FRONTMATTER" | grep "^mode:" | awk '{print $2}')
+            if [ "$MODE" != "subagent" ]; then
+              echo "  FAIL: mode must be 'subagent', found: '$MODE' in $agent_file"
+              FAILED=1
+            else
+              echo "  OK mode is 'subagent'"
+            fi
+          done
+
+          if [ $AGENT_COUNT -ne $EXPECTED_AGENTS ]; then
+            echo "  FAIL: Expected $EXPECTED_AGENTS agents, found $AGENT_COUNT"
+            FAILED=1
+          else
+            echo "  OK Found $AGENT_COUNT agents"
+          fi
+
+          if [ $FAILED -ne 0 ]; then
+            echo ""
+            echo "Agent validation FAILED."
+            exit 1
+          fi
+
+          echo ""
+          echo "All agents validated successfully."
+
+  validate-prompts:
+    name: Validate prompts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check prompt files exist
+        run: |
+          echo "Checking prompt files..."
+          FAILED=0
+
+          if [ ! -f "prompts/global-instructions.md" ]; then
+            echo "  FAIL: Missing prompts/global-instructions.md"
+            FAILED=1
+          else
+            echo "  OK prompts/global-instructions.md exists"
+          fi
+
+          if [ ! -f "prompts/orchestrator.md" ]; then
+            echo "  FAIL: Missing prompts/orchestrator.md"
+            FAILED=1
+          else
+            echo "  OK prompts/orchestrator.md exists"
+          fi
+
+          # Check that global-instructions references all 14 agents
+          if [ -f "prompts/global-instructions.md" ]; then
+            for agent in el-maestro bug-doctor el-de-las-gafas las-manos el-pintor el-herrero el-arbitro el-explorador el-operador el-investigador el-instalador el-configurador el-integrador el-supervisor; do
+              if ! grep -q "$agent" prompts/global-instructions.md; then
+                echo "  FAIL: Agent '$agent' not referenced in global-instructions.md"
+                FAILED=1
+              fi
+            done
+            echo "  OK All 14 agents referenced in global-instructions.md"
+          fi
+
+          # Check that orchestrator references all 14 agents
+          if [ -f "prompts/orchestrator.md" ]; then
+            for agent in el-maestro bug-doctor el-de-las-gafas las-manos el-pintor el-herrero el-arbitro el-explorador el-operador el-investigador el-instalador el-configurador el-integrador el-supervisor; do
+              if ! grep -q "$agent" prompts/orchestrator.md; then
+                echo "  FAIL: Agent '$agent' not referenced in orchestrator.md"
+                FAILED=1
+              fi
+            done
+            echo "  OK All 14 agents referenced in orchestrator.md"
+          fi
+
+          if [ $FAILED -ne 0 ]; then
+            echo ""
+            echo "Prompt validation FAILED."
+            exit 1
+          fi
+
+          echo ""
+          echo "All prompts validated successfully."
+
+  validate-opencode-json:
+    name: Validate opencode.json
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check opencode.json is valid JSON
+        run: |
+          echo "Validating opencode.json..."
+          if ! python3 -c "import json; json.load(open('opencode.json'))" 2>&1; then
+            echo "opencode.json is not valid JSON"
+            exit 1
+          fi
+          echo "OK Valid JSON"
+
+      - name: Check opencode.json has deny wildcard
+        run: |
+          WILDCARD=$(python3 -c "
+          import json
+          with open('opencode.json') as f:
+              config = json.load(f)
+          skills = config.get('permission', {}).get('skill', {})
+          print(skills.get('*', 'not_set'))
+          ")
+
+          if [ "$WILDCARD" != "deny" ]; then
+            echo "FAIL: opencode.json must have '*': 'deny' as last rule"
+            exit 1
+          fi
+          echo "OK '*': 'deny' is set"
+
+      - name: Check explore and general are disabled
+        run: |
+          EXPLORE_DISABLED=$(python3 -c "
+          import json
+          with open('opencode.json') as f:
+              config = json.load(f)
+          agent = config.get('agent', {})
+          explore = agent.get('explore', {})
+          print(explore.get('disable', 'not_set'))
+          ")
+
+          GENERAL_DISABLED=$(python3 -c "
+          import json
+          with open('opencode.json') as f:
+              config = json.load(f)
+          agent = config.get('agent', {})
+          general = agent.get('general', {})
+          print(general.get('disable', 'not_set'))
+          ")
+
+          if [ "$EXPLORE_DISABLED" != "True" ]; then
+            echo "FAIL: explore must be disabled"
+            exit 1
+          fi
+          echo "OK explore is disabled"
+
+          if [ "$GENERAL_DISABLED" != "True" ]; then
+            echo "FAIL: general must be disabled"
+            exit 1
+          fi
+          echo "OK general is disabled"
+
+      - name: Check docs exist
+        run: |
+          FAILED=0
+
+          if [ ! -f "docs/conflict-resolution.md" ]; then
+            echo "  FAIL: Missing docs/conflict-resolution.md"
+            FAILED=1
+          else
+            echo "  OK docs/conflict-resolution.md exists"
+          fi
+
+          if [ ! -f "tests/hooks.md" ]; then
+            echo "  FAIL: Missing tests/hooks.md"
+            FAILED=1
+          else
+            echo "  OK tests/hooks.md exists"
+          fi
+
+          if [ ! -f "CHANGELOG.md" ]; then
+            echo "  FAIL: Missing CHANGELOG.md"
+            FAILED=1
+          else
+            echo "  OK CHANGELOG.md exists"
+          fi
+
+          if [ ! -f "README.md" ]; then
+            echo "  FAIL: Missing README.md"
+            FAILED=1
+          else
+            echo "  OK README.md exists"
+          fi
+
+          if [ $FAILED -ne 0 ]; then
+            echo ""
+            echo "Documentation validation FAILED."
+            exit 1
+          fi
+
+          echo ""
+          echo "All documentation files present."
