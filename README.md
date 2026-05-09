@@ -321,6 +321,44 @@ cp prompts/global-instructions.md ~/.config/opencode/prompts/
 cp -r .opencode/skills/* ~/.config/opencode/skills/
 ```
 
+### Configuración necesaria en opencode.json
+
+El archivo `opencode.json` de este proyecto ya incluye toda la configuración necesaria:
+
+```json
+{
+  "instructions": ["prompts/global-instructions.md"],
+  "agent": {
+    "explore": { "disable": true },
+    "general": { "disable": true },
+    "build": {
+      "prompt": "{file:./prompts/orchestrator.md}",
+      "permission": {
+        "edit": "deny", "bash": "deny",
+        "task": "allow",
+        "skill": "allow"
+      }
+    },
+    "plan": {
+      "prompt": "{file:./prompts/orchestrator.md}",
+      "permission": {
+        "edit": "deny", "bash": "deny",
+        "task": "allow",
+        "skill": "allow"
+      }
+    }
+  }
+}
+```
+
+**Qué hace cada cosa:**
+- `instructions`: Aplica las reglas globales a todos los agentes (14 agentes, clarificación de requisitos, delegación con auditoría)
+- `explore { disable: true }`: Desactiva el agente explorador nativo de OpenCode. Lo reemplazamos con `@el-explorador`
+- `general { disable: true }`: Desactiva el agente general nativo. Lo reemplazamos con `@el-operador` y el resto del septeto
+- `build` y `plan` con `edit: deny, bash: deny`: Actúan como orquestadores. No ejecutan nada directamente — solo analizan y delegan a los agentes del sistema mediante Task tool
+
+> **Importante**: Si solo copias los agentes sin esta configuración, `@explore` y `@general` seguirán apareciendo y Build/Plan intentarán ejecutar ellos mismos las tareas. La configuración del `opencode.json` es TAN importante como los agentes.
+
 ---
 
 ## 🤝 Colaboración con ETC — El Septeto Calavera
