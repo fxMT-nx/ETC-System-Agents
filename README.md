@@ -1,6 +1,8 @@
-# ETC-System-Agents
+# 🛠️ ETC System Agents
 
-Sistema de 7 agentes especializados para tareas del sistema operativo, configuración, y mantenimiento. Cada agente es un subagente autónomo con un dominio específico.
+7 agentes del sistema para [OpenCode](https://opencode.ai) que reemplazan a `@explore` y `@general`. Cada agente tiene un dominio estricto: exploración, operación, investigación web, instalación, configuración, integración y supervisión.
+
+> **14 agentes en total**: estos 7 System Agents + los 7 [ETC — El Septeto Calavera](https://github.com/felixmoto44-spec/ETC-El-Septeto-Calavera) (Maestro, Bug Doctor, El de las Gafas, Las Manos, El Pintor, El Herrero, El Árbitro) forman el ecosistema completo ETC.
 
 ## Los 7 Agentes del Sistema
 
@@ -21,6 +23,31 @@ Sistema de 7 agentes especializados para tareas del sistema operativo, configura
 - **Auditoría**: el que delega es responsable del resultado final
 - **Formato unificado**: `frontmatter` con `description` y `mode: subagent` + markdown completo
 
+## Cómo se Usan
+
+| Método | Sintaxis | Ejemplo |
+|--------|----------|---------|
+| **@mención** | `@el-investigador` | `@el-investigador busca documentación de la API de Stripe` |
+| **Lenguaje natural** | Describir la tarea | `Necesito instalar Node.js 20` → El Supervisor enruta al Instalador |
+
+Los agentes se invocan por `@` en OpenCode. Si no sabes cuál usar, invoca a **El Supervisor** (`@el-supervisor`) que analizará la tarea y la derivará al agente correcto.
+
+### Cómo se Integran con ETC — El Septeto Calavera
+
+Los **7 System Agents** se enfocan en tareas del sistema operativo, investigación web, instalación y configuración. Los **7 ETC** se enfocan en desarrollo de software: TDD, debugging, dominio, infraestructura, frontend, backend y arbitraje.
+
+```
+System Agents (sistema/ops)          ETC Septeto (desarrollo)
+─────────────────────────────        ─────────────────────────
+🧭 Explorador    → solo lectura      🧪 Maestro         → TDD
+🛠️ Operador      → ejecutor general   🩺 Bug Doctor      → debugging
+🔍 Investigador  → búsqueda web       🤓 El de las Gafas → dominio
+📦 Instalador    → paquetes           🖐️ Las Manos        → infraestructura
+🎛️ Configurador  → configs            🎨 El Pintor       → frontend
+🔗 Integrador    → APIs externas      ⚒️ El Herrero       → backend
+⚖️ Supervisor    → router + conflictos ⚖️ El Árbitro      → conflictos ETC
+```
+
 ## Instalación
 
 Los agentes se instalan en `~/.config/opencode/agents/`:
@@ -28,6 +55,8 @@ Los agentes se instalan en `~/.config/opencode/agents/`:
 ```bash
 cp .opencode/agents/*.md ~/.config/opencode/agents/
 ```
+
+Si también usas [ETC — El Septeto Calavera](https://github.com/felixmoto44-spec/ETC-El-Septeto-Calavera), tendrás 14 agentes disponibles en tu OpenCode.
 
 ## Estructura
 
@@ -46,6 +75,10 @@ prompts/
 └── orchestrator.md
 opencode.json
 ```
+
+## Proyecto Hermano
+
+[**ETC — El Septeto Calavera**](https://github.com/felixmoto44-spec/ETC-El-Septeto-Calavera) — los 7 agentes de desarrollo (TDD, debugging, dominio, infra, frontend, backend, arbitraje) que completan el ecosistema de 14 agentes.
 
 ## Licencia
 
