@@ -361,6 +361,20 @@ El archivo `opencode.json` de este proyecto ya incluye toda la configuración ne
 
 > **Importante**: Si solo copias los agentes sin esta configuración, `@explore` y `@general` seguirán apareciendo y Build/Plan intentarán ejecutar ellos mismos las tareas. La configuración del `opencode.json` es TAN importante como los agentes.
 
+### Herramientas de investigación
+
+@el-investigador usa herramientas nativas del sistema para investigar en internet:
+
+| Herramienta | Instalación | Coste |
+|-------------|-------------|-------|
+| `lynx` | `sudo apt install lynx` | ✅ Gratis |
+| `html2text` | `pip install html2text` | ✅ Gratis |
+| `curl` | Viene con el SO | ✅ Gratis |
+| `jq` | `sudo apt install jq` | ✅ Gratis |
+
+Sin API keys, sin cuentas, sin configuraciones.
+Si necesitas firecrawl (opcional, con API key), se puede instalar con `npm install -g firecrawl`.
+
 ---
 
 ## 🤝 Colaboración con ETC — El Septeto Calavera

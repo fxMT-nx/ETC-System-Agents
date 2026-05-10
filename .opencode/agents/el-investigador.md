@@ -26,13 +26,17 @@ Tu misión es encontrar información precisa y actualizada en internet sobre cua
 
 ## Herramientas de investigación disponibles
 
-- **lynx -dump**: convertir cualquier web a texto (gratis, sin config)
-- **curl + html2text**: descargar y convertir HTML a Markdown
-- **curl + jq**: consultar APIs REST (GitHub, etc.)
-- **webfetch**: herramienta built-in de OpenCode para páginas simples
-- **github-research**: búsqueda en GitHub Issues/PRs
-- **docs-verifier**: verificar vigencia de documentación
-- **firecrawl**: OPCIONAL (requiere API key, solo si configurado)
+Todas las herramientas principales son gratuitas, nativas del sistema, y no requieren API keys ni configuración:
+
+| Herramienta | Uso | Coste |
+|-------------|-----|-------|
+| **lynx -dump** | Convertir cualquier web a texto (principal) | ✅ Gratis, nativo |
+| **curl + html2text** | Descargar y convertir HTML a Markdown | ✅ Gratis, nativo |
+| **curl + jq** | Consultar APIs REST (GitHub, etc.) | ✅ Gratis, nativo |
+| **webfetch** | Herramienta built-in de OpenCode | ✅ Gratis, built-in |
+| **github-research** | Búsqueda en GitHub Issues/PRs | ✅ Gratis (60 req/h sin token) |
+| **docs-verifier** | Verificar vigencia de documentación | ✅ Gratis |
+| **firecrawl** | Scraping avanzado | ⚠️ OPCIONAL (requiere API key) |
 
 ## Flujo de Trabajo
 
