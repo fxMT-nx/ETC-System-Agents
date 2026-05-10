@@ -82,7 +82,7 @@ Agente que decide. Cuando los demás no saben quién debe actuar, él decide. Cu
 
 ## 🤝 Colaboración entre Agentes
 
-Los 7 System Agents no trabajan en aislamiento — se invocan entre sí automáticamente según el contexto. Hay **24 hooks de colaboración** (S1–S18, C54–C56) documentados en sus instrucciones.
+Los 7 System Agents no trabajan en aislamiento — se invocan entre sí automáticamente según el contexto. Hay **24 hooks de colaboración** (S1–S18, C54–C61) documentados en sus instrucciones.
 
 Además, los 7 agentes incorporan un **Protocolo de Handoff con Auditoría**: cuando reciben una tarea fuera de su especialidad, la delegan al agente correcto con todo el contexto, auditan el resultado contra lo que pidió el usuario, y son responsables de la entrega final.
 
@@ -102,7 +102,7 @@ Cada agente tiene un rol primario claro, y cuando detecta que está fuera de su 
 | 🔗 **Integrador** | Integración de APIs externas | 📦 Instalador (CLIs), 🎛️ Configurador (credenciales), 🔍 Investigador (docs API), 🛠️ Operador (cambios en código) |
 | ⚖️ **Supervisor** | Decidir ruta, resolver conflictos | Usuario (tarea irresoluble) |
 
-### Los 24 hooks de colaboración (S1–S18, C54–C56)
+### Los 24 hooks de colaboración (S1–S18, C54–C61)
 
 #### Hooks S1–S2: El Explorador deriva
 
@@ -152,13 +152,15 @@ Cada agente tiene un rol primario claro, y cuando detecta que está fuera de su 
 | S17 | 🔗 Integrador | Necesita documentación actualizada de la API | 🔍 Investigador | Documentación de API obtenida y verificada |
 | S18 | 🔗 Integrador | Integración requiere cambios en el código del proyecto | 🛠️ Operador | Código modificado para soportar la integración |
 
-#### Hooks compartidos con ETC (C54–C56)
+#### Hooks compartidos con ETC (C54–C61)
 
 | # | Inicia | Gatillo | Invoca a | Resultado |
 |---|--------|---------|----------|-----------|
 | C54 | Cualquier agente | Necesita buscar información actualizada en internet | 🔍 Investigador | Investigación multicanal con resultados comparados y nivel de confianza |
 | C55 | 🔍 Investigador | Investigación revela información relevante para el equipo | ✍️ Investigador | Mini-ADR o nota documentada en el proyecto |
 | C56 | Cualquiera | Agente delegó tarea y especialista reportó resultado | Agente que delegó | Auditoría: ¿cumple lo que pidió el usuario? Si no → ajustes o arbitraje |
+| C60 | Cualquier agente | ≥ 3 iteraciones sin progreso, o > 30 min sin output verificable | 🩺 Bug Doctor (ETC) | Diagnóstico de atasco: ¿bug, mal enfoque, o bloqueo externo? |
+| C61 | Cualquier agente | ≥ 3 errores distintos en la misma sesión | 🩺 Bug Doctor (ETC) | Diagnóstico de causa raíz antes de seguir parcheando |
 
 ### Reglas de Delegación Obligatoria
 
@@ -428,7 +430,7 @@ Mientras **ETC System Agents** se enfoca en tareas del sistema operativo (explor
 ### v1.0.0 — Los 7 System Agents (2026-05-09)
 
 - 7 agentes del sistema creados: 🧭 Explorador, 🛠️ Operador, 🔍 Investigador, 📦 Instalador, 🎛️ Configurador, 🔗 Integrador, ⚖️ Supervisor
-- 24 hooks de colaboración (S1–S18, C54–C56)
+- 24 hooks de colaboración (S1–S18, C54–C61)
 - 18 reglas de delegación obligatoria entre system agents
 - Protocolo de Handoff con Auditoría (C56)
 - Hooks C54–C55 compartidos con ETC para investigación web y documentación
