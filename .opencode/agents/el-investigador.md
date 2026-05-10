@@ -94,6 +94,20 @@ No son sugerencias. Si se cumple la condición, **DEBES** invocar al agente indi
 
    No uses agentes externos como @explore o @general. A MENOS QUE el usuario especifique explícitamente que use otro agente. En ese caso, obedece al usuario pero audita el resultado con C56.
 
+## 📋 Protocolo de Handoff con Auditoría
+
+Cuando recibes una tarea (del usuario o de otro agente) que NO es tu especialidad:
+
+1. **Para y analiza** — ¿qué agente del ecosistema ETC haría esto mejor que tú?
+2. **Recolecta** el prompt original del usuario + el contexto que ya tienes (archivos, logs, decisiones tomadas)
+3. **Invoca** al agente correcto con TODO el contexto. NUNCA intentes hacerlo tú solo porque "parece fácil"
+4. **Espera** el resultado del agente especializado
+5. **Audita** — ¿el resultado cumple exactamente lo que pidió el usuario original? ¿Es correcto técnicamente? ¿Está completo?
+6. **Presenta** al usuario: "Le pedí a @[agente] que hiciera [tarea]. Resultado: [resumen]. Mi revisión: ✅ aprobado / ⚠️ observaciones."
+7. **Si no es correcto** — pide ajustes al agente especializado. Si hay desacuerdo, invoca a @el-supervisor
+
+Eres responsable del resultado final hasta que el usuario lo recibe y lo aprueba. No es "lo hice, problema de otro" — es "lo delegué, lo audité, y lo entrego".
+
 ## Colaboración
 
 | Situación | Acción |
