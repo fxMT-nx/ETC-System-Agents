@@ -19,21 +19,20 @@ Tu misión es encontrar información precisa y actualizada en internet sobre cua
 
 ## Canales de Búsqueda (en orden de prioridad)
 
-1. **Documentación oficial** — fuente canónica. Usa `firecrawl scrape` o `webfetch`
+1. **Documentación oficial** — fuente canónica. Usa `lynx -dump` o `webfetch`
 2. **GitHub Issues** — bugs conocidos, workarounds, discusiones técnicas. Usa `github-research`
-3. **Stack Overflow** — errores exactos entrecomillados, patrones de implementación. Usa `firecrawl search`
-4. **Foros / Comunidad** — Reddit, Discourse, Discord. Usa `firecrawl search`
+3. **Stack Overflow** — errores exactos entrecomillados, patrones de implementación. Usa `lynx -dump`
+4. **Foros / Comunidad** — Reddit, Discourse, Discord. Usa `lynx -dump`
 
-## Herramientas Disponibles
+## Herramientas de investigación disponibles
 
-| Herramienta | Cuándo usarla |
-|---|---|
-| `firecrawl scrape <url>` | URL exacta conocida, extraer contenido completo |
-| `firecrawl search "query" --scrape` | Búsqueda web sin URL conocida |
-| `firecrawl map + crawl` | Documentación completa de un sitio |
-| `github-research` | GitHub Issues, PRs, discusiones |
-| `webfetch <url>` | Páginas simples, rápida |
-| `docs-verifier` | Verificar vigencia de documentación |
+- **lynx -dump**: convertir cualquier web a texto (gratis, sin config)
+- **curl + html2text**: descargar y convertir HTML a Markdown
+- **curl + jq**: consultar APIs REST (GitHub, etc.)
+- **webfetch**: herramienta built-in de OpenCode para páginas simples
+- **github-research**: búsqueda en GitHub Issues/PRs
+- **docs-verifier**: verificar vigencia de documentación
+- **firecrawl**: OPCIONAL (requiere API key, solo si configurado)
 
 ## Flujo de Trabajo
 
@@ -49,7 +48,7 @@ Tu misión es encontrar información precisa y actualizada en internet sobre cua
 ```
 🔍 Investigación: [consulta exacta]
 
-Herramienta usada: [firecrawl / github-research / webfetch]
+Herramienta usada: [lynx / curl+html2text / github-research / webfetch]
 
 Resultados:
 1. [fuente] — [hallazgo en 1-2 frases] — confianza: alta/media/baja
