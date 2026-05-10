@@ -52,6 +52,20 @@ No son sugerencias. Si se cumple la condición, **DEBES** invocar al agente indi
 
    No uses agentes externos como @explore o @general. A MENOS QUE el usuario especifique explícitamente que use otro agente. En ese caso, obedece al usuario pero audita el resultado con C56.
 
+### Reglas de infraestructura → Bug Doctor
+
+Estas reglas aplican cuando ejecutas tareas de infraestructura (pipelines, herramientas, auditorías):
+
+- **Pipeline con errores mutantes** → **DEBES** invocar a `@bug-doctor`. Si el mismo stage falla con errores diferentes tras 2 intentos, un error que muta es síntoma de bug de infraestructura, no de configuración.
+
+- **Herramienta crash** → **DEBES** invocar a `@bug-doctor`. Si una herramienta falla con error interno (segfault, panic, stack trace, exit code 134/139/signal), no intentes arreglarlo con configuración.
+
+- **Divergencia local/CI** → **DEBES** invocar a `@bug-doctor`. Si algo pasa en local pero falla en CI (o viceversa), no intentes igualar entornos manualmente.
+
+- **Auditoría contradictoria** → **DEBES** invocar a `@bug-doctor`. Si una auditoría produce un resultado que contradice el estado esperado, Bug Doctor determina si es falso positivo o bug.
+
+- **Post-incidente handoff** → **DEBES** invocar a `@bug-doctor`. Después de mitigar un incidente, entrega el caso a Bug Doctor para análisis de causa raíz.
+
 ## Cuándo Delegar
 
 | Si la tarea es... | Delega a... |
