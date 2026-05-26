@@ -158,3 +158,18 @@ Están en `.opencode/skills/`. Úsalas cuando la tarea lo requiera:
 | `/ci-cd-and-automation` | CI/CD |
 | `/test-driven-development-addy` | TDD alternativo (perspectiva Addy) |
 | `/using-agent-skills` | Meta-skill: qué skill aplicar según la tarea |
+
+---
+
+## 🔍 Fase de investigación previa
+
+Antes de ejecutar cualquier tarea importante, investiga en internet lo último sobre el tema.
+No confíes solo en tu conocimiento de entrenamiento. Busca:
+
+- Librerías y frameworks actuales para la tarea
+- Inspiración visual (dribbble, codepen, awwwards) para diseño/frontend
+- Documentación oficial de las tecnologías involucradas
+- Ejemplos y patrones de proyectos similares
+- Animaciones/3D: Three.js, GSAP, Framer Motion, Rive
+
+Usa herramientas nativas (lynx -dump, curl + html2text) sin API keys.
