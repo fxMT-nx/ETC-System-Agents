@@ -270,6 +270,38 @@ Fase 3: 🔗 Integrador (Stripe API keys)
 
 ---
 
+## 🧩 Skills de Proceso — addyosmani/agent-skills (23)
+
+Este repo incluye **23 skills de proceso** del repositorio [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) (45.7K ⭐), que complementan a los System Agents con metodologías de desarrollo:
+
+| Skill | Propósito | Sinergia con |
+|-------|-----------|--------------|
+| `spec-driven-development` | Spec antes que código | 🛠️ Operador |
+| `incremental-implementation` | Entregas por capas | 🛠️ Operador |
+| `code-simplification` | Reducir complejidad | 🧭 Explorador |
+| `shipping-and-launch` | Checklist de salida | 🛠️ Operador |
+| `test-driven-development` | TDD como proceso | 🛠️ Operador |
+| `debugging-and-error-recovery` | Debugging metódico | 🛠️ Operador |
+| `code-review-and-quality` | Revisión sistemática | 🧭 Explorador |
+| `ci-cd-and-automation` | Pipelines | 🛠️ Operador |
+| `security-and-hardening` | Seguridad | 🔒 (sistémico) |
+| `performance-optimization` | Optimización | 📡 Monitor |
+| `documentation-and-adrs` | Documentación técnica | ✍️ (sistémico) |
+| `planning-and-task-breakdown` | Descomposición | ⚖️ Supervisor |
+| `context-engineering` | Contexto para LLMs | 🧭 Explorador |
+| `doubt-driven-development` | Cuestionar supuestos | ⚖️ Supervisor |
+| `deprecation-and-migration` | Migración ordenada | 🛠️ Operador |
+| `api-and-interface-design` | Diseño de interfaces | 🔗 Integrador |
+| `browser-testing-with-devtools` | Testing en browser | 🔍 Investigador |
+| `frontend-ui-engineering` | Ingeniería de UI | 🛠️ Operador |
+| `git-workflow-and-versioning` | Flujos git | 🛠️ Operador |
+| `idea-refine` | Refinamiento de ideas | ⚖️ Supervisor |
+| `interview-me` | Preparación de entrevistas | 🔍 Investigador |
+| `source-driven-development` | Desarrollo guiado por código | 🧭 Explorador |
+| `using-agent-skills` | Cómo usar agent skills | ⚖️ Supervisor |
+
+Se activan por `/comando` o por lenguaje natural.
+
 ## 📁 Estructura de Archivos
 
 ```
