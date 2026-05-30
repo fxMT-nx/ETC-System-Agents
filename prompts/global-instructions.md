@@ -129,38 +129,6 @@ El sistema crece orgánicamente. Si una tarea se repite, deja de ser "algo que n
 
 ---
 
-## Skills de proceso disponibles (23 de addyosmani/agent-skills)
-
-Están en `.opencode/skills/`. Úsalas cuando la tarea lo requiera:
-
-| Skill | Cuándo usarla |
-|-------|---------------|
-| `/spec-driven-development` | Tarea compleja que necesita diseño antes de código |
-| `/planning-and-task-breakdown` | Tarea multi-paso que planificar |
-| `/incremental-implementation` | Implementar en slices verticales |
-| `/code-review-and-quality` | Revisar código antes de entregar |
-| `/code-simplification` | Simplificar código sin cambiar comportamiento |
-| `/interview-me` | Preguntas una a una para clarificar |
-| `/idea-refine` | Refinar ideas vagas |
-| `/source-driven-development` | Verificar contra documentación oficial |
-| `/doubt-driven-development` | Decisiones críticas (segunda opinión) |
-| `/shipping-and-launch` | Lanzamientos y deployments |
-| `/security-and-hardening` | Auditoría de seguridad |
-| `/performance-optimization` | Optimización de rendimiento |
-| `/deprecation-and-migration` | Deprecar APIs y migrar |
-| `/documentation-and-adrs` | Documentación y ADRs |
-| `/browser-testing-with-devtools` | Testing visual en navegador |
-| `/debugging-and-error-recovery` | Debugging estructurado |
-| `/context-engineering` | Gestionar contexto largo |
-| `/frontend-ui-engineering` | Diseño de UI profesional |
-| `/api-and-interface-design` | Diseño de APIs |
-| `/git-workflow-and-versioning` | Git workflow |
-| `/ci-cd-and-automation` | CI/CD |
-| `/test-driven-development-addy` | TDD alternativo (perspectiva Addy) |
-| `/using-agent-skills` | Meta-skill: qué skill aplicar según la tarea |
-
----
-
 ## 🔍 Fase de investigación previa
 
 Antes de ejecutar cualquier tarea importante, investiga en internet lo último sobre el tema.
@@ -173,3 +141,20 @@ No confíes solo en tu conocimiento de entrenamiento. Busca:
 - Animaciones/3D: Three.js, GSAP, Framer Motion, Rive
 
 Usa herramientas nativas (lynx -dump, curl + html2text) sin API keys.
+
+## 🛠️ Herramientas disponibles
+
+Los agentes del ecosistema ETC tienen acceso a bash y herramientas del sistema para ejecutar tareas:
+
+| Herramienta | Uso |
+|-------------|-----|
+| **bash** | Ejecutar comandos, scripts, automatización |
+| **curl / wget** | Descargar, consultar APIs |
+| **git** | Clonar, commits, worktrees |
+| **lynx** | Navegación web a texto |
+| **html2text** | HTML a Markdown |
+| **jq** | Procesar JSON |
+| **python3 / node** | Scripts |
+| **npm / pip / apt** | Dependencias |
+
+No hay restricciones para tareas legítimas de desarrollo y administración.
